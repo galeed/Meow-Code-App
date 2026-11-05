@@ -1,9 +1,4 @@
 
----
-
-## 📄 `sw.js`
-
-```js
 const CACHE_NAME = 'meow-code-app-v2';
 const ASSETS = [
   './',
