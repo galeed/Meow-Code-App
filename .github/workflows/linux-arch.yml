@@ -1,43 +1,50 @@
-name: Build Arch Linux Package
+name: Build Meow-Code-App Arch Package
 
 on:
-push:
-branches:
-- main
-- master
-paths:
-- 'PKGBUILD'
-- '**/*.install'
-pull_request:
-branches:
-- main
-- master
-workflow_dispatch: # Permite ejecutar la compilación manualmente desde la pestaña "Actions" de GitHub
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'PKGBUILD'
+      - 'index.html'
+      - '**/*.js'
+      - '**/*.css'
+  workflow_dispatch: # Te permite iniciar la compilación manualmente desde la pestaña "Actions" de GitHub
 
 jobs:
-build:
-runs-on: ubuntu-latest
+  build-package:
+    runs-on: ubuntu-latest
 
-steps:
-- name: Checkout repository
-uses: actions/checkout@v4
+    steps:
+      - name: Checkout Meow-Code-App repository
+        uses: actions/checkout@v4
 
-- name: Arch Linux PKGBUILD Package
-uses: MotorTruck1221/arch-linux-pkgbuild-package@v2.2.1
-with:
-# Actualiza automáticamente los checksums si el código fuente cambia
-updpkgsums: true
-# Genera el archivo .SRCINFO necesario para repositorios y validaciones
-srcinfo: true
-# Analiza el paquete con namcap en busca de errores o malas prácticas
-namcap: true
-# Flags adicionales para makepkg (-c limpia, -f fuerza, -s sincroniza dependencias, --noconfirm automatiza)
-flags: '-cfs --noconfirm'
+      - name: Build Arch Linux PKGBUILD Package
+        uses: MotorTruck1221/arch-linux-pkgbuild-package@v2.2.1
+        with:
+          # Ruta donde está el PKGBUILD (en la raíz de tu repo)
+          path: '.'
+          
+          # Calcula y actualiza automáticamente el sha256sum cuando cambia el código
+          updpkgsums: true
+          
+          # Genera el archivo .SRCINFO necesario para estándares de Arch y AUR
+          srcinfo: true
+          
+          # Ejecuta namcap para auditar la estructura del paquete y avisar si hay errores
+          namcap: true
+          
+          # Activa paru por si agregas dependencias externas del AUR en el futuro
+          aur: true
+          
+          # Parámetros de makepkg: limpia temporales (-c), fuerza sobrescritura (-f), instala dependencias (-s) y automatiza (--noconfirm)
+          flags: '-cfs --noconfirm'
 
-- name: Upload built package artifact
-uses: actions/upload-artifact@v4
-with:
-name: archlinux-package
-path: |
-*.pkg.tar.*
-.SRCINFO
+      - name: Upload built Arch package as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: meow-code-app-arch-package
+          path: |
+            *.pkg.tar.zst
+            .SRCINFO
