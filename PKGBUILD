@@ -1,4 +1,4 @@
-# Maintainer: Galéêd León <galeed@moustachedechatlab.com>
+# Maintainer: galeed <galeedx@gmail.com>
 pkgname=meow-code-app
 pkgver=1.0.0
 pkgrel=1
