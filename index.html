@@ -6,6 +6,13 @@
   <meta name="theme-color" content="#0a0d14">
   <meta name="description" content="Meow Code App - Editor HTML visual con vista previa en vivo">
   <title>Meow Code App</title>
+  <!-- iOS PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MeowCode">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<!-- color scheme -->
+<meta name="color-scheme" content="dark">
   <link rel="manifest" href="./manifest.json">
 
   <!-- CodeMirror 5 -->
@@ -500,6 +507,170 @@
       box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+ /* ═══════════════════════════════════════════════════════════
+   SKIN "MEOW" — Violeta neón + acentos rosa gatuno
+   ═══════════════════════════════════════════════════════════ */
+body.skin-meow {
+  --bg-dark: #0f0a1a;
+  --bg-panel: rgba(26, 18, 42, 0.72);
+  --neon-cyan: #b16dff;      /* violeta principal */
+  --neon-green: #4dffb8;     /* verde menta */
+  --neon-yellow: #ffd166;
+  --neon-magenta: #ff4d94;   /* rosa gatuno */
+  --text-main: #ede4ff;
+  --text-dim: #8a7ba8;
+  --border-glow: rgba(177, 109, 255, 0.3);
+  background: radial-gradient(circle at 20% 10%, #1b0f33 0%, #0f0a1a 60%);
+}
+
+body.skin-meow header {
+  background: linear-gradient(180deg, rgba(26,18,42,0.9) 0%, rgba(15,10,26,0.9) 100%);
+  border-bottom: 1px solid var(--border-glow);
+  backdrop-filter: blur(14px);
+}
+
+body.skin-meow .brand-logo {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+  box-shadow: 0 0 12px var(--neon-cyan), 0 0 22px rgba(255,77,148,0.4);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  transform: rotate(0deg);
+  animation: meow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes meow-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.15); }
+}
+
+body.skin-meow .brand-title {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #fff, var(--neon-cyan), var(--neon-magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.skin-meow .brand-title span {
+  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-yellow));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body.skin-meow .btn-run {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+  color: #fff;
+  box-shadow: 0 0 14px rgba(177,109,255,0.55);
+  border-radius: 20px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+}
+body.skin-meow .btn-run:active { transform: scale(0.95); filter: brightness(1.15); }
+
+body.skin-meow .status-tag {
+  border-color: var(--neon-green);
+  color: var(--neon-green);
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(77,255,184,0.35);
+}
+
+body.skin-meow .icon-mode-btn.active,
+body.skin-meow .tab-btn.active {
+  color: var(--neon-cyan);
+  background: rgba(177,109,255,0.15);
+  border-bottom-color: var(--neon-cyan);
+}
+
+body.skin-meow .wysiwyg-bar {
+  background: linear-gradient(180deg, #1a1230, #140d26);
+  border-bottom-color: var(--border-glow);
+}
+
+body.skin-meow .wy-btn {
+  background: rgba(177,109,255,0.12);
+  border-color: var(--border-glow);
+  border-radius: 6px;
+}
+body.skin-meow .wy-btn:active {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+  color: #fff;
+}
+
+body.skin-meow .action-bar {
+  background: linear-gradient(0deg, rgba(26,18,42,0.95), rgba(15,10,26,0.85));
+  border-top-color: var(--border-glow);
+}
+
+body.skin-meow .btn {
+  border-radius: 8px;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+body.skin-meow .btn-primary {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+  color: #fff;
+}
+
+body.skin-meow .dropdown-menu,
+body.skin-meow .modal-box {
+  background: rgba(26,18,42,0.97) !important;
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 22px rgba(177,109,255,0.4);
+  backdrop-filter: blur(18px);
+}
+
+body.skin-meow .dropdown-section-title {
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  color: #fff;
+  letter-spacing: 1.5px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+body.skin-meow .dropdown-item:hover {
+  background: rgba(177,109,255,0.2);
+  color: #fff;
+}
+
+body.skin-meow .modal-header {
+  background: linear-gradient(90deg, rgba(177,109,255,0.25), rgba(255,77,148,0.25));
+  color: #fff;
+}
+
+body.skin-meow .modal-btn-save {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+  color: #fff;
+}
+
+body.skin-meow .zoom-btn {
+  background: rgba(177,109,255,0.12);
+  border-color: var(--border-glow);
+  border-radius: 6px;
+}
+body.skin-meow .zoom-btn:active {
+  background: var(--neon-cyan);
+  color: #0f0a1a;
+}
+
+body.skin-meow #toast {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 22px rgba(177,109,255,0.5);
+}
+
+/* 🐾 Patitas decorativas sutiles en los laterales del workspace */
+body.skin-meow .workspace::before,
+body.skin-meow .workspace::after {
+  content: "🐾";
+  position: absolute;
+  font-size: 1.2rem;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 1;
+}
+body.skin-meow .workspace::before { top: 8px; left: 8px; transform: rotate(-20deg); }
+body.skin-meow .workspace::after  { bottom: 8px; right: 8px; transform: rotate(160deg); }
+  
   </style>
 </head>
 
