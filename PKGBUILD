@@ -11,7 +11,7 @@ source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
 sha256sums=('SKIP')
 
 package() {
-    cd "$pkgname-$pkgver"
+    cd "$srcdir/Meow-Code-App-$pkgver"
     
     # Crear el directorio de destino en el sistema (por ejemplo, /usr/share/meow-code-app)
     install -dm755 "$pkgdir/usr/share/$pkgname"
