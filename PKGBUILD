@@ -1,6 +1,6 @@
 # Maintainer: galeed <galeedx@gmail.com>
 pkgname=meow-code-app
-pkgver=v1.0.0
+pkgver=1.0.0
 pkgrel=1
 pkgdesc="Una aplicación web de desarrollo y utilidades minimalista centrada en el flujo de trabajo de código"
 arch=('any')
