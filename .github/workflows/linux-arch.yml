@@ -37,7 +37,8 @@ jobs:
           
           # Activa paru por si agregas dependencias externas del AUR en el futuro
           aur: true
-          
+
+          update_archlinux_keyring: true
           # Parámetros de makepkg: limpia temporales (-c), fuerza sobrescritura (-f), instala dependencias (-s) y automatiza (--noconfirm)
           flags: '-cfs --noconfirm'
 
