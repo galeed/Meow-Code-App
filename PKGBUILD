@@ -1,29 +1,60 @@
-# Maintainer: galeed <galeedx@gmail.com>
-pkgname=meow-code-app
+# Maintainer: galeed <galeed@archlinux.local>
+pkgname=meow-code-app-git
 pkgver=1.0.0
 pkgrel=1
-pkgdesc="Una aplicación web de desarrollo y utilidades minimalista centrada en el flujo de trabajo de código"
+pkgdesc="Editor de coodigo html"
 arch=('any')
 url="https://github.com/galeed/Meow-Code-App"
 license=('MIT')
-depends=('bash')
-source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+depends=('electron')
+makedepends=('git' 'npm')
+source=("git+$url.git")
 sha256sums=('SKIP')
 
+
+
+pkgver() {
+  cd "$srcdir/Meow-Code-App"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "$srcdir/Meow-Code-App"
+
+  true
+}
+
 package() {
-    cd "$srcdir/Meow-Code-App-$pkgver"
-    
-    # Crear el directorio de destino en el sistema (por ejemplo, /usr/share/meow-code-app)
-    install -dm755 "$pkgdir/usr/share/$pkgname"
-    
-    # Copiar todos los archivos de la app al directorio del sistema
-    cp -r * "$pkgdir/usr/share/$pkgname/"
-    
-    # Crear un script lanzador simbólico en /usr/bin por si deseas ejecutarlo o integrarlo con un entorno de escritorio
-    install -dm755 "$pkgdir/usr/bin"
-    cat << EOF > "$pkgdir/usr/bin/meow-code-app"
+  cd "$srcdir/Meow-Code-App"
+
+
+  install -d "$pkgdir/usr/share/meow-code-app"
+  cp -r * "$pkgdir/usr/share/meow-code-app/"
+
+
+  install -d "$pkgdir/usr/bin"
+  cat <<EOF > "$pkgdir/usr/bin/meow-code-app"
 #!/bin/bash
-xdg-open /usr/share/meow-code-app/index.html
+exec electron /usr/share/meow-code-app/main.js "\$@"
 EOF
-    chmod +x "$pkgdir/usr/bin/meow-code-app"
+  chmod +x "$pkgdir/usr/bin/meow-code-app"
+
+  
+  install -d "$pkgdir/usr/share/applications"
+  cat <<EOF > "$pkgdir/usr/share/applications/meow-code-app.desktop"
+[Desktop Entry]
+Name=Meow Code App
+Comment=Editor de coodigo html
+Exec=meow-code-app %U
+Terminal=false
+Type=Application
+Icon=meow-code-app
+Categories=HTML;CODE;DEVELOPER;
+EOF
+
+
+  install -d "$pkgdir/usr/share/pixmaps"
+  if [ -f "icon-512.png" ]; then
+    cp icon-512.png "$pkgdir/usr/share/pixmaps/meow-code-app.png"
+  fi
 }
